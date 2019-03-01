@@ -1,0 +1,116 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1551453479164-1
+      author: raymondmm
+      changes:
+        - createSequence:
+            sequenceName: answer_sequence
+  - changeSet:
+      id: 1551453479164-2
+      author: raymondmm
+      changes:
+        - createSequence:
+            sequenceName: question_sequence
+  - changeSet:
+      id: 1551453479164-3
+      author: raymondmm
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: answers_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: created_at
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  constraints:
+                    nullable: false
+                  name: updated_at
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  name: text
+                  type: TEXT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: question_id
+                  type: BIGINT
+            tableName: answers
+  - changeSet:
+      id: 1551453479164-4
+      author: raymondmm
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: questions_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: created_at
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  constraints:
+                    nullable: false
+                  name: updated_at
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  name: description
+                  type: TEXT
+              - column:
+                  name: title
+                  type: VARCHAR(100)
+            tableName: questions
+  - changeSet:
+      id: 1551453479164-5
+      author: raymondmm
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: question_id
+            baseTableName: answers
+            constraintName: fk3erw1a3t0r78st8ty27x6v3g1
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: CASCADE
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: questions
+            validate: true
+  - changeSet:
+      id: loadData-example
+      author: liquibase-docs
+      changes:
+        - loadData:
+            catalogName: questions
+            columns:
+              - column:
+                  name: id
+                  type: NUMERIC
+              - column:
+                  name: created_at
+                  type: DATE
+              - column:
+                  name: updated_at
+                  type: DATE
+              - column:
+                  name: description
+                  type: STRING
+              - column:
+                  name: title
+                  type: STRING
+            encoding: UTF-8
+            file: data/questions.csv
+            quotchar:
+            schemaName: public
+            separator:
+            tableName: questions
