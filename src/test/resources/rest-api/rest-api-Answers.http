@@ -1,0 +1,24 @@
+### Get request with a header and parameter
+GET http://localhost:8080/questions/1000/answers
+Accept: application/json
+
+### Send POST request with json body
+POST http://localhost:8080/questions/1000/answers
+Content-Type: application/json
+
+{
+  "text": "It's very easy to configure PostgreSQL in a Spring Boot application. blah blah blab..."
+}
+
+### Send PUT request with json body
+PUT http://localhost:8080/questions/1000/answers/1000
+Content-Type: application/json
+
+{
+  "text": "It's very easy to configure PostgreSQL in a Spring Boot application..."
+}
+
+### Send DELETE request with parameters
+DELETE http://localhost:8080/questions/1000/answers/1000
+
+###
